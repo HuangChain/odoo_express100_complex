@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!--继承stock.picking的form表单，添加字段-->
+        <record id="view_form_stock_picking_inherited" model="ir.ui.view">
+            <field name="name">stock_picking_inherit_kuaidi</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <!--在priority子段后面添加快递公司和快递单号字段-->
+                <field name="priority" position="after">
+                    <field name="com_name" />
+                    <field name="kuaidi_number" />
+                </field>
+                <!--在头部添加手动更新物流信息按钮-->
+                <header position="inside">
+                    <button name="manual_updata_kuaidi" type="object" string="更新物流" class="oe_highlight"/>
+                </header>
+                <!--在notebook标签后面添加物流信息显示的界面-->
+                <notebook position="after">
+                    <notebook>
+                        <page string="物流信息">
+                            <field name="kuaidi_info"/>
+                        </page>
+                    </notebook>
+                </notebook>
+            </field>
+        </record>
+        <!--继承stock.picking的tree视图，添加最新物流信息字段-->
+        <record id="view_tree_stock_piking_inherited" model="ir.ui.view">
+            <field name="name">stock_picking_inherit_kuaidi</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree" />
+            <field name="arch" type="xml">
+                <field name="picking_type_id" position="after">
+                    <field name="kuaidi_tree_info"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!--
+        打开动作
+        -->
+        <record model="ir.actions.act_window" id="action_kuaidi_check">
+            <field name="name">快递查询</field>
+            <field name="res_model">kuaidi.check</field>
+            <field name="view_model">tree,form</field>
+        </record>
+
+
+        <!--
+        表单视图
+        -->
+        <record id="form_kuaidi_check" model="ir.ui.view">
+            <field name="name">kuaidi.list.form</field>
+            <field name="model">kuaidi.check</field>
+            <field name="arch" type="xml">
+                <form>
+
+                    <sheet>
+                        <group name="group_top" string="快递查询">
+                            <field name="name"/>
+                            <field name="number"/>
+                            <field name="info"/>
+                            <button name="get_Info" type="object" string="查询" class="oe_highlight"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--
+        tree视图
+        -->
+        <record id="tree_kuaidi_check" model="ir.ui.view">
+            <field name="name">kuaidi.list.tree</field>
+            <field name="model">kuaidi.check</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="number"/>
+                    <field name="tree_info"/>
+                </tree>
+            </field>
+        </record>
+        <!--
+        加入菜单
+        -->
+        <menuitem id="menu_kuaidi" name="快递" sequence="0"></menuitem>
+        <menuitem id="menu_kuaidi_list" name="快递查询" parent="menu_kuaidi"></menuitem>
+        <menuitem id="menu_kuaidi_list_item" parent="menu_kuaidi_list" action="action_kuaidi_check"></menuitem>
+    </data>
+</odoo>
